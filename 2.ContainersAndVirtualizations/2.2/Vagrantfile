@@ -1,0 +1,40 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+$install_postgresql = <<~SCRIPT
+  sudo sh -c 'echo "deb https://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
+  wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+  sudo apt-get update
+  sudo apt-get -y install postgresql
+SCRIPT
+
+Vagrant.configure(2) do |config|
+  config.vm.box = "bento/ubuntu-20.04"
+  config.vm.box_check_update = false
+
+  config.vm.define "web-server" do |wsconfig|
+    wsconfig.vm.provider "virtualbox" do |vb|
+	  vb.name = "nginx-server"
+	  vb.memory = 1048
+	  vb.cpus = 1
+	  end
+	  
+	wsconfig.vm.network "private_network", ip: "192.168.53.3"
+	wsconfig.vm.hostname = "nginx-host"
+    wsconfig.vm.provision "nginx", type: "shell", inline: "apt-get install -y nginx"
+    end
+  
+  config.vm.define "database" do |dbconfig|
+    dbconfig.vm.provider "virtualbox" do |vb|
+	  vb.name = "postgresql-server"
+	  vb.memory = 2096
+	  vb.cpus = 2
+	  end
+	
+	dbconfig.vm.network "private_network", ip: "192.168.53.4"
+	dbconfig.vm.hostname = "postgresql-host"
+	dbconfig.vm.provision "postgresql", type: "shell", inline: $install_postgresql
+	end
+  config.vm.provision "update", type: "shell", inline: "apt-get update && apt-get upgrade -y"
+	
+end
