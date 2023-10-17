@@ -1,0 +1,3 @@
+warning no space in disk
+warning cannot connect to network
+warning
