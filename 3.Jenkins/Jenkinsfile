@@ -1,14 +1,22 @@
 pipeline {
-    agent none 
+    agent {
+        docker {
+            image 'rikorose/gcc-cmake:8'
+        }
+    }
+	parameters {
+        booleanParam(name: 'BUILD_EXECUTABLE', defaultValue: false, description: '')
+    }
     stages {
         stage('Build') { 
-            agent {
-                docker {
-                    image 'python:3.9' 
-                }
-            }
             steps {
-                sh 'python3 -m pip install -r requirements.txt' 
+                sh 'mkdir -p build && cd build && cmake .. -DBUILD_EXECUTABLE=${params.BUILD_EXECUTABLE} && cmake --build . -j'
+                archiveArtifacts artifacts: 'build/MyExecutable'
+            }
+        }
+        stage('Test') {
+            steps {
+                sh 'cd build && ./MyExecutable'
             }
         }
     }

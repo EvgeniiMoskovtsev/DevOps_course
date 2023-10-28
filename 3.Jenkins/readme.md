@@ -9,6 +9,12 @@ security group на AWS
 
 Приложение буду использовать из задания 2.4
 
+Free tier server t3.micro умер, поэтому пришлось заново накатывать все на более мощный
 
+Взял medium сервер. Pipeline завелся, но выдает ошибку
+Installing collected packages: zipp, MarkupSafe, itsdangerous, click, blinker, Werkzeug, Jinja2, importlib-metadata, flask
+ERROR: Could not install packages due to an OSError: [Errno 13] Permission denied: '/.local'
+Check the permissions.
 
- 
+Добавив args '-u root' в agent docker проблема решилась
+
