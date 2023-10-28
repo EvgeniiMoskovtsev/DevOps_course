@@ -1,16 +1,17 @@
 pipeline {
     agent {
         docker {
-            image 'rikorose/gcc-cmake:latest' args '-u root'
+            image 'rikorose/gcc-cmake:latest' 
+	    args '-u root'
         }
     }
-	parameters {
+    parameters {
         booleanParam(name: 'BUILD_EXECUTABLE', defaultValue: false, description: '')
     }
     stages {
         stage('Build') { 
             steps {
-                sh 'mkdir -p build && cd build && cmake .. -DBUILD_EXECUTABLE=${params.BUILD_EXECUTABLE} && cmake --build . -j'
+                sh 'mkdir -p build && cd build && cmake .. -DBUILD_EXECUTABLE="${params.BUILD_EXECUTABLE}" && cmake --build . -j'
                 archiveArtifacts artifacts: 'build/MyExecutable'
             }
         }
