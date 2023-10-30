@@ -12,7 +12,7 @@ pipeline {
         stage('Build') { 
             steps {
                 sh """cd 3.Jenkins && mkdir -p build && cd build && cmake .. -DBUILD_EXECUTABLE="${params.BUILD_EXECUTABLE}" && cmake --build . -j"""
-                archiveArtifacts artifacts: '3.Jenkins/build/MyExecutabl'
+                archiveArtifacts artifacts: '3.Jenkins/build/MyExecutable'
             }
         }
         stage('Test') {
