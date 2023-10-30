@@ -11,7 +11,7 @@ pipeline {
     stages {
         stage('Build') { 
             steps {
-                sh """mkdir -p build && cd build && cmake .. -DBUILD_EXECUTABLE="${params.BUILD_EXECUTABLE}" && cmake --build . -j"""
+                sh """cd 3.Jenkins && mkdir -p build && cd build && cmake .. -DBUILD_EXECUTABLE="${params.BUILD_EXECUTABLE}" && cmake --build . -j"""
                 archiveArtifacts artifacts: 'build/MyExecutable'
             }
         }
