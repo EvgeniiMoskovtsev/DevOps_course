@@ -23,7 +23,7 @@ pipeline {
         stage('Backup to S3') {
             steps {
                 script {
-                    def awsCredentials = 'AKIA3K3VZYCXTDCBQE7V'
+                    def awsCredentials = '4f616675-464a-46b3-8833-6121dca08a2b'
                     
                     s3Upload(
                         credentialsId: awsCredentials,
