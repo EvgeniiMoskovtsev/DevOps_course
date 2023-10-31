@@ -23,7 +23,7 @@ pipeline {
         stage('Backup to S3') {
             steps {
                 script {
-		    s3Upload(file: '3.Jenkins/build/MyExecutable', bucket: 'evgmos-test', path: 'backup/MyExecutable', kmsId: '4f616675-464a-46b3-8833-6121dca08a2b')
+		    s3Upload(file: '3.Jenkins/build/MyExecutable', bucket: 'evgmos-test', path: 'backup/MyExecutable')
                 }
             }
         }
