@@ -24,7 +24,7 @@ pipeline {
             steps {
                 withAWS(credentials: 'jenkins-test', region: 'eu-north-1'){
                     sh 'ls 3.Jenkins/build'
-                    s3Upload (acl: 'Private' , bucket: 'evgmos-test' , file: '3.Jenkins/build/MyExecutable')
+                    s3Upload(bucket: 'evgmos-test' , file: '3.Jenkins/build/MyExecutable')
                 }
             }
         }
