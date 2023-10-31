@@ -20,5 +20,19 @@ pipeline {
                 sh """cd 3.Jenkins/build && ./MyExecutable"""
             }
         }
+        stage('Backup to S3') {
+            steps {
+                script {
+                    def awsCredentials = 'AKIA3K3VZYCXTDCBQE7V'
+                    
+                    s3Upload(
+                        credentialsId: awsCredentials,
+                        file: '3.Jenkins/build/MyExecutable',
+                        bucket: 'evgmos-test',
+                        path: 'backup/MyExecutable'
+                    )
+                }
+            }
+        }
     }
 }
