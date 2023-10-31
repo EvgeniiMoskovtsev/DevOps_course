@@ -23,14 +23,10 @@ pipeline {
         stage('Backup to S3') {
             steps {
                 script {
-                    def awsCredentials = '4f616675-464a-46b3-8833-6121dca08a2b'
-                    
-                    s3Upload(
-                        credentialsId: awsCredentials,
-                        file: '3.Jenkins/build/MyExecutable',
-                        bucket: 'evgmos-test',
-                        path: 'backup/MyExecutable'
-                    )
+                    withAWS(region:'us-west-2',credentials:'4f616675-464a-46b3-8833-6121dca08a2b') {
+                      sh 'echo "Uploading content with AWS creds"'
+                      s3Upload(pathStyleAccessEnabled: true, payloadSigningEnabled: true, file:'3.Jenkins/build/MyExecutable', bucket:'evgmos-test')
+                  }
                 }
             }
         }
