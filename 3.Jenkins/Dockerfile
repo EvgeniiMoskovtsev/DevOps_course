@@ -1,5 +1,5 @@
 FROM rikorose/gcc-cmake:latest
-WORKING /project
+WORKDIR /project
 
 COPY . /project
 
