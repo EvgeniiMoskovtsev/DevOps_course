@@ -1,20 +1,48 @@
-Для работы с Jenkins я буду использовать AWS EC2,
-сам Jenkins будет работать из докера
+Для работы с TeamCity я буду использовать AWS EC2.
+Установка очень простая:
 
-Для установки я воспользовался официальной документацией
-https://www.jenkins.io/doc/book/installing/docker/
+Скачем Java 17:
+wget https://download.oracle.com/java/17/latest/jdk-17_linux-x64_bin.rpm
 
-Запустил докер образ на 8080 (как в документации) и открыл этот порт в
-security group на AWS
+и установим
+sudo yum -y install ./jdk-17_linux-x64_bin.rpm
 
-Приложение буду использовать из задания 2.4
+Скачаем TeamCity:
+wget https://download.jetbrains.com/teamcity/TeamCity-2023.05.4.tar.gz
 
-Free tier server t3.micro умер, поэтому пришлось заново накатывать все на более мощный
+распакуем:
+tar -zxvf ./TeamCity-2023.05.4.tar.gz
 
-Взял medium сервер. Pipeline завелся, но выдает ошибку
-Installing collected packages: zipp, MarkupSafe, itsdangerous, click, blinker, Werkzeug, Jinja2, importlib-metadata, flask
-ERROR: Could not install packages due to an OSError: [Errno 13] Permission denied: '/.local'
-Check the permissions.
+и запустим:
+./TeamCity-2023.05.4.tar.gz/bin/runAll.sh start
 
-Добавив args '-u root' в agent docker проблема решилась
+Установим Докер, т.к. проект билдится в нем
+sudo yum install docker
+И добавим в докер груп
+sudo usermod -a -G docker ec2-user
+
+
+TeamCity работает по дефолту на порту 8111, я его открою в SecurityGroups
+
+
+Создаём проект и указываем репозиторий имя и токен. Создаём stage Build. Далее укаываем Имя билда и ветку (staging)
+Выбираем билдить Dockerfile с тэгом %env.BUILD_NUMBER%, чтобы иметь версии билдов. Добавил также билд аргумент:
+--build-arg BUILD_EXECUTABLE=ON.
+
+Создадим бэкап. Для этого после каждого билда деплоим проект в dockerhub. 
+
+
+Теперь деплой. Создадим connection к AWS, укажим access key, secret key, проверим connection:
+Running STS get-caller-identity...
+Caller Identity:
+ Account ID: 779246747823
+ User ID: AIDA3K3VZYCXSWXYHPATT
+ ARN: arn:aws:iam::779246747823:user/evgenii-admin
+ 
+ Вернул нас, все ок.
+
+И теперь по ssh делаем docker run "наш проект":номер_билда
+ 
+
+
 
