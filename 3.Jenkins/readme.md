@@ -41,9 +41,12 @@ Caller Identity:
  
  Вернул нас, все ок.
 
-И теперь по ssh делаем docker run "наш проект":номер_билда
+И настриваем деплой, чтобы по ssh запустилась команда docker run -p 8080:80 "наш проект":номер_билда
  
 И наконец ставим VCS trigger на Trigger a build on each check in
 
 Тоже самое повторяем для master ветки, только тэг добавим latest и тригер делаем на Pull Requests, для этого в Builder features настраиваем taraget branch: master
+
+Поменяем номер порта:
+И теперь по ssh делаем docker run -p 8081:80 "наш проект":номер_билда
 
