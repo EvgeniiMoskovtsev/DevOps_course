@@ -30,17 +30,7 @@ TeamCity работает по дефолту на порту 8111, я его о
 --build-arg BUILD_EXECUTABLE=ON.
 
 Создадим бэкап. Для этого после каждого билда деплоим проект в dockerhub. 
-
-
-Теперь деплой. Создадим connection к AWS, укажим access key, secret key, проверим connection:
-Running STS get-caller-identity...
-Caller Identity:
- Account ID: 779246747823
- User ID: AIDA3K3VZYCXSWXYHPATT
- ARN: arn:aws:iam::779246747823:user/evgenii-admin
- 
- Вернул нас, все ок.
-
+Теперь деплой. Добавим ssh ключ к виртуальной машине
 И настриваем деплой, чтобы по ssh запустилась команда docker run -p 8080:80 "наш проект":номер_билда
  
 И наконец ставим VCS trigger на Trigger a build on each check in
