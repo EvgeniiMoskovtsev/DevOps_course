@@ -45,4 +45,5 @@ Caller Identity:
  
 И наконец ставим VCS trigger на Trigger a build on each check in
 
+Тоже самое повторяем для master ветки, только тэг добавим latest и тригер делаем на Pull Requests, для этого в Builder features настраиваем taraget branch: master
 
