@@ -43,6 +43,6 @@ Caller Identity:
 
 И теперь по ssh делаем docker run "наш проект":номер_билда
  
-
+И наконец ставим VCS trigger на Trigger a build on each check in
 
 
