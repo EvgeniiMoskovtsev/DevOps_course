@@ -3,8 +3,7 @@ WORKDIR /project
 
 COPY . /project
 
-RUN cd 3.Jenkins && \
-    mkdir -p build && \
+RUN mkdir -p build && \
     cd build && \
     cmake .. -DBUILD_EXECUTABLE=ON && \
     cmake --build . -j
