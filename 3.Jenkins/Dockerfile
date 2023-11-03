@@ -3,9 +3,10 @@ WORKDIR /project
 
 COPY . /project
 
+ARG BUILD_EXECUTABLE
 RUN mkdir -p build && \
     cd build && \
-    cmake .. -DBUILD_EXECUTABLE=ON && \
+    cmake .. -DBUILD_EXECUTABLE=BUILD_EXECUTABLE && \
     cmake --build . -j
 	
-ENTRYPOINT ["/project/3.Jenkins/build/MyExecutable"]
+ENTRYPOINT ["/project/build/MyExecutable"]
