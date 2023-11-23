@@ -97,8 +97,42 @@
 	4. Настроим nginx, создадим nginx.conf и докер файл
 	5. Добавим Dockerrun.aws.json и пропишем eb create
 	Логи:
-
+	Environment details for: itransition-homework-dev
+	  Application name: itransition-homework
+	  Region: eu-north-1
+	  Deployed Version: app-231124_014709745753
+	  Environment ID: e-fi9cmxfuwg
+	  Platform: arn:aws:elasticbeanstalk:eu-north-1::platform/ECS running on 64bit Amazon Linux 2023/4.0.1
+	  Tier: WebServer-Standard-1.0
+	  CNAME: itransition-homework-dev.eu-north-1.elasticbeanstalk.com
+	  Updated: 2023-11-23 21:47:18.655000+00:00
+	Printing Status:
+	2023-11-23 21:47:17    INFO    createEnvironment is starting.
+	2023-11-23 21:47:18    INFO    Using elasticbeanstalk-eu-north-1-779246747823 as Amazon S3 storage bucket for environment data.
+	2023-11-23 21:47:39    INFO    Created security group named: sg-0c9fb661570066473
+	2023-11-23 21:47:39    INFO    Created load balancer named: awseb-e-f-AWSEBLoa-1MYDUOO67BKQT
+	2023-11-23 21:47:56    INFO    Created security group named: awseb-e-fi9cmxfuwg-stack-AWSEBSecurityGroup-ZTN8SF04PDEJ
+	2023-11-23 21:47:57    INFO    Created Auto Scaling launch configuration named: awseb-e-fi9cmxfuwg-stack-AWSEBAutoScalingLaunchConfiguration-sGCib9lqMAdQ
+	2023-11-23 21:48:13    INFO    Created Auto Scaling group named: awseb-e-fi9cmxfuwg-stack-AWSEBAutoScalingGroup-aUYOYj9v2HlY
+	2023-11-23 21:48:13    INFO    Waiting for EC2 instances to launch. This may take a few minutes.
+	2023-11-23 21:48:13    INFO    Created Auto Scaling group policy named: arn:aws:autoscaling:eu-north-1:779246747823:scalingPolicy:476513c0-b70d-4471-b0b9-f17eca957507:autoScalingGroupName/awseb-e-fi9cmxfuwg-stack-AWSEBAutoScalingGroup-aUYOYj9v2HlY:policyName/awseb-e-fi9cmxfuwg-stack-AWSEBAutoScalingScaleUpPolicy-AdfvOpMqbfif
+	2023-11-23 21:48:13    INFO    Created Auto Scaling group policy named: arn:aws:autoscaling:eu-north-1:779246747823:scalingPolicy:b22aa976-1aa3-4345-aaee-404d029c495e:autoScalingGroupName/awseb-e-fi9cmxfuwg-stack-AWSEBAutoScalingGroup-aUYOYj9v2HlY:policyName/awseb-e-fi9cmxfuwg-stack-AWSEBAutoScalingScaleDownPolicy-D83DxOYNX7Wn
+	2023-11-23 21:48:29    INFO    Created CloudWatch alarm named: awseb-e-fi9cmxfuwg-stack-AWSEBCloudwatchAlarmHigh-EDrlakqxXw93
+	2023-11-23 21:48:29    INFO    Created CloudWatch alarm named: awseb-e-fi9cmxfuwg-stack-AWSEBCloudwatchAlarmLow-YZoj0W2z7Rn6
+	2023-11-23 21:51:07    INFO    Successfully launched environment: itransition-homework-dev
 	
+	6. Далее деплоим eb deploy
+	Логи:
+	Creating application version archive "app-231124_020132885045".
+	Uploading itransition-homework/app-231124_020132885045.zip to S3. This may take a while.
+	Upload Complete.
+	2023-11-23 22:01:39    INFO    Environment update is starting.
+	2023-11-23 22:01:49    INFO    Deploying new version to instance(s).
+	2023-11-23 22:03:20    INFO    New application version was deployed to running EC2 instances.
+	2023-11-23 22:03:20    INFO    Environment update completed successfully.
+	
+	7. Заходим на itransition-homework-dev.eu-north-1.elasticbeanstalk.com, страница Не открывается.
+	8. eb logs, смотрим логи. Я не запушил контейнеры в докер хаб. Исправляем это.
 	
 	
 	
