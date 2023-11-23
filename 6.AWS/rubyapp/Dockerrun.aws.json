@@ -3,7 +3,8 @@
   "containerDefinitions": [
     {
       "name": "nginx",
-      "image": "nginx:latest",
+      "image": "nginx-custom",
+	  "memory": 128,
       "essential": true,
       "portMappings": [
         {
@@ -13,7 +14,7 @@
       ]
     },
     {
-      "name": "rails",
+      "name": "rubyapp",
       "image": "rubyapp",
       "essential": true,
       "memory": 128,

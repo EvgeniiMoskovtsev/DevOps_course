@@ -91,8 +91,18 @@
 	   C:\Users\user\AppData\Roaming\Python\Python310\Scripts
 	   Проверим: eb --version
 	   EB CLI 3.20.10 (Python 3.10.9 | packaged by Anaconda, Inc. | (main, Mar  1 2023, 18:18:15) [MSC v.1916 64 bit (AMD64)])
-	   
-	2. Зайдём в папку и пропишем eb init, выбирем eu-north-1 регион, выберем название проекта, выберем Ruby язык, версию 3.2
+	
+	2. Создадим руби проект и докер файл.
+	3. Зайдём в папку руби проекта и пропишем eb init, выбирем eu-north-1 регион, выберем название проекта, выберем Ruby язык, версию 3.2,  ECS running on 64bit Amazon Linux 2023
+	4. Настроим nginx, создадим nginx.conf и докер файл
+	5. Добавим Dockerrun.aws.json и пропишем eb create
+	Логи:
+
+	
+	
+	
+	
+	
 	
 	
 		
