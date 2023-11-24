@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: flask-app-2-4-pod
+
+spec:
+  containers:
+  - name: flask-app-2-4
+    image: emoskovtsev/flask-app-2-4-pod:latest
+    ports:
+     - containerPort: 8888
