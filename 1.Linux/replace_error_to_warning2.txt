@@ -1,0 +1,3 @@
+error no space in disk
+error cannot connect to network
+error
