@@ -135,9 +135,29 @@
 	10. Все работает
 
 Часть 3.
-
-
-
+	1. Создадим два инстанса, server1, server2.
+	2. В secutity group разрешим доступ по ssh и порт 8080
+	3. Можно установить Jenkins через докер, как я уже это делал, на этот раз я его установлю локально.
+		sudo yum install java-11-amazon-corretto - для установки java
+		sudo wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat/jenkins.repo
+		sudo rpm --import https://pkg.jenkins.io/redhat/jenkins.io.key
+		sudo yum install jenkins -y
+		sudo service jenkins start
+	4. Найдём токен в /var/lib/jenkins/secrets/initialAdminPassword и создадим пользователя
+	5. На server 1 создадим ключ
+	   ssh-keygen -t rsa -b 4096 -C "zhekamoskovcev@yandex.ru"
+	   и закинем содержимое публичного ключа в ~/.ssh/authorized_keys в server 2
+	6. Проверим, зайдём с server1 на server2
+	7. Устанавливаем докер на server2:
+	   sudo yum install docker
+	   sudo usermod -a -G docker ec2-user
+	   newgrp docker - Это для того, чтобы не выходить из консоли и сразу пользоваться докером
+	
+	8. Создадим credentials в Jenkins.
+	9. Запушим Jenkins file в репозиторий. 
+	10. В настройках нашего job, добавим переменную STAGE_INSTANCE, чтобы она была прописана только локально
+	11. Job не запускается, проблема в known_hosts. Добавим наш сервер: ssh-keyscan -H 172.31.38.191 >> ~/.ssh/known_hosts
+	   
 	
 	
 	
