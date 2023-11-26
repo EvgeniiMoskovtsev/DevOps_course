@@ -1,0 +1,33 @@
+ansible_user: vagrant
+ansible_password: !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          38373961623733666338636663643561363966653431303234366563336563386330326331623330
+          6266343635653433653064393465306630303065303066620a333464383263383432306665653936
+          33326139303363623863663532333933333339306664303561353831363933393261336165643833
+          6336313761393239610a343930656434386134386466376134343961316364393764316633366131
+          3136
+
+monit_services:
+    - name: monit
+      type: process
+      target: /var/run/monit.pid
+
+    - name: system_cpu
+      type: system
+      rules:
+          - if loadavg (1min) > 4 for 2 cycles then alert
+          - if loadavg (5min) > 2 for 4 cycles then alert
+
+    - name: system_memory
+      type: system
+      rules:
+          - if memory usage > 75% for 4 cycles then alert
+
+    - name: root_filesystem
+      type: filesystem
+      target: /
+      rules:
+        - if space usage > 80% for 2 cycles then alert
+
+monit_service_delete_unlisted: false
+openjdk_app: "jdk"

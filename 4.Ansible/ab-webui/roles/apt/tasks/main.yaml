@@ -1,0 +1,24 @@
+---
+- name: Install basic packages
+  block:
+    - name: Install git
+      apt:
+        name: git
+        state: present
+        update_cache: yes
+    
+    - name: Install vim
+      apt:
+        name: vim
+        state: present
+        update_cache: yes
+    
+    - name: Update all packages to the latest version
+      apt:
+        upgrade: dist
+    
+  become: true
+  
+
+    
+

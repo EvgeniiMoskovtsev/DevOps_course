@@ -1,0 +1,10 @@
+---
+- name: All configs
+  hosts: ab_haproxy
+  become: yes
+  roles:
+    - apt
+    - ntp
+    - geerlingguy.haproxy
+    - monit
+

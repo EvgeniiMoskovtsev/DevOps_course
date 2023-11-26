@@ -1,0 +1,12 @@
+---
+- name: Install Elasticsearch
+  apt:
+    update_cache: yes
+    name: elasticsearch
+    
+    
+- name: Power on Elasticsearch
+  systemd:
+    name: logstash
+    enabled: yes
+    state: elasticsearch

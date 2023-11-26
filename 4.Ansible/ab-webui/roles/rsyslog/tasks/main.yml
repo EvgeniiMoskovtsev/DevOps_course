@@ -1,0 +1,9 @@
+- name: Install rsyslog
+  apt:
+    name: rsyslog
+    state: present
+- name: Power on rsyslog
+  systemd:
+    name: rsyslog
+    state: started
+    enabled: yes

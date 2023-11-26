@@ -1,0 +1,11 @@
+---
+- name: All configs
+  hosts: ab_logstash
+  become: yes
+  roles:
+    - apt
+    - ntp
+    - monit
+    - andrewrothstein.openjdk
+    - logstash
+    - elasticsearch

@@ -1,0 +1,27 @@
+---
+- name: Install required pkgs
+  apt:
+    name: apt-transport-https
+    state: present
+
+- name: Add GPG keys
+  shell: |
+    wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | gpg --dearmor -o /usr/share/keyrings/elastic-keyring.gpg
+
+- name: Add repo Elastic
+  lineinfile:
+    path: /etc/apt/sources.list.d/elastic-8.x.list
+    line: "deb [signed-by=/usr/share/keyrings/elastic-keyring.gpg] https://artifacts.elastic.co/packages/8.x/apt stable main"
+    create: yes
+
+- name: Install Logstash
+  apt:
+    update_cache: yes
+    name: logstash
+    
+- name: Power on Logstash
+  systemd:
+    name: logstash
+    enabled: yes
+    state: started
+
