@@ -1,0 +1,7 @@
+{
+  "monit_configured_services": [
+{% for service in monit_services %}
+    "{{ service.name }}",
+{% endfor %}
+  ]
+}

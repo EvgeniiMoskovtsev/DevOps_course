@@ -1,0 +1,11 @@
+---
+- name: All configs
+  hosts: ab_webui
+  become: yes
+  roles:
+#    - apt
+#    - ntp
+#    - monit
+#    - rsyslog
+#    - geerlingguy.kibana
+    - nginx

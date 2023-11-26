@@ -1,0 +1,28 @@
+---
+- name: Install ntp and configure ntp
+  block:
+    - name: Install ntp
+      apt:
+        name: ntp
+        state: present
+
+    - name: Configure NTP server to use Europe pool
+      lineinfile:
+        path: /etc/ntp.conf
+        regexp: '^pool '
+        line: 'pool europe.pool.ntp.org iburst'
+        state: present
+        
+    - name: Schedule ntp sync daily
+      cron:
+        name: "Daily ntp sync"
+        job: "ntpd -qg"
+        special_time: daily
+        user: "{{ ansible_user }}"
+
+    - name: Restart NTP service
+      service:
+        name: ntp
+        state: restarted
+        
+  become: yes
