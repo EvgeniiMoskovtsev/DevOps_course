@@ -25,7 +25,7 @@
       authorized_key:
         user: "evgenii"
         state: present
-        key: "{{ lookup('file', '/path/to/your/public/key.pub') }}"
+        key: "{{ lookup('file', '~/.ssh/my-key.pub') }}"
         
     - name: Add cron job to remove logs every 1 minutes
       ansible.builtin.cron:
