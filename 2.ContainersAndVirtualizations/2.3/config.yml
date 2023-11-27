@@ -13,6 +13,19 @@
         name: nginx
         state: started
         enabled: yes
+
+    - name: Add user
+      user:
+        name: "evgenii"
+        state: present
+        create_home: yes
+        shell: /bin/bash
+
+    - name: Add ssh key
+      authorized_key:
+        user: "evgenii"
+        state: present
+        key: "{{ lookup('file', '/path/to/your/public/key.pub') }}"
         
     - name: Add cron job to remove logs every 1 minutes
       ansible.builtin.cron:
